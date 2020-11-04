@@ -1,2 +1,5 @@
-nbproject
+nbproject/private
+build-impl.xml
+nbproject/genfiles.properties
+nbproject/project.properties
 build
