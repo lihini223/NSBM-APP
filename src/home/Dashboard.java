@@ -28,13 +28,33 @@ public class Dashboard extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
+        btnEvents = new javax.swing.JButton();
+        btnTimetable = new javax.swing.JButton();
+        btnCMS = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(1200, 600));
         setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(58, 181, 74));
-        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPanel1.setLayout(null);
+
+        btnEvents.setText("Events");
+        btnEvents.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEventsActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnEvents);
+        btnEvents.setBounds(150, 160, 280, 120);
+
+        btnTimetable.setText("Timetable");
+        jPanel1.add(btnTimetable);
+        btnTimetable.setBounds(530, 170, 260, 110);
+
+        btnCMS.setText("File a Complain");
+        jPanel1.add(btnCMS);
+        btnCMS.setBounds(150, 330, 280, 120);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -51,12 +71,21 @@ public class Dashboard extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnEventsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEventsActionPerformed
+        events.Events eventsForm = new events.Events();
+        eventsForm.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnEventsActionPerformed
+
     /**
      * @param args the command line arguments
      */
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnCMS;
+    private javax.swing.JButton btnEvents;
+    private javax.swing.JButton btnTimetable;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }
