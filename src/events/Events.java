@@ -3,19 +3,41 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package home;
+package events;
+
+import java.awt.Color;
+import javax.swing.BoxLayout;
+import javax.swing.JPanel;
 
 /**
  *
  * @author Rajatha
  */
-public class Welcome extends javax.swing.JFrame {
+public class Events extends javax.swing.JFrame {
+    JPanel eventsPanel = null;
 
     /**
-     * Creates new form Welcome
+     * Creates new form Events
      */
-    public Welcome() {
+    public Events() {
         initComponents();
+        initializeEvents();
+    }
+    
+    public void initializeEvents(){
+        eventsPanel = new JPanel();
+        eventsPanel.setBounds(0, 0, 950, 370);
+        eventsPanel.setBackground(Color.blue);
+        eventsPanel.setLayout(new BoxLayout(eventsPanel, BoxLayout.Y_AXIS));
+        
+        EventTest e1 = new EventTest("FOSS", "SOC-L101", "Git iganagamuda", "imgs\\nsbmlogo.PNG");
+        eventsPanel.add(e1);
+        //for(int i = 0;i < 20;i++){
+            EventTest e2 = new EventTest("IEEE", "SOE-002", "Mehetath enna, apenuth mal ganna", "imgs\\nsbmlogo.PNG");
+            eventsPanel.add(e2);
+        //}
+        sclEvents.setViewportView(eventsPanel);
+        revalidate();
     }
 
     /**
@@ -29,30 +51,23 @@ public class Welcome extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        btnLogin = new javax.swing.JButton();
+        jComboBox1 = new javax.swing.JComboBox<>();
+        sclEvents = new javax.swing.JScrollPane();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(1200, 600));
         setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(58, 181, 74));
-        jPanel1.setLayout(null);
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel1.setText("Welcome");
-        jLabel1.setAlignmentY(0.0F);
-        jPanel1.add(jLabel1);
-        jLabel1.setBounds(510, 150, 84, 22);
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
+        jLabel1.setText("Events");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 60, -1, -1));
 
-        btnLogin.setBackground(new java.awt.Color(26, 86, 158));
-        btnLogin.setText("Login");
-        btnLogin.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnLoginActionPerformed(evt);
-            }
-        });
-        jPanel1.add(btnLogin);
-        btnLogin.setBounds(430, 240, 265, 109);
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "All Events", "FOC", "FOB", "FOE", "Auditorium", "Entertainment" }));
+        jPanel1.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 60, 230, 40));
+        jPanel1.add(sclEvents, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 150, 950, 370));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -68,12 +83,6 @@ public class Welcome extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
-        Login loginForm = new Login();
-        loginForm.setVisible(true);
-        this.hide();
-    }//GEN-LAST:event_btnLoginActionPerformed
 
     /**
      * @param args the command line arguments
@@ -92,27 +101,28 @@ public class Welcome extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Welcome.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Events.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Welcome.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Events.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Welcome.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Events.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Welcome.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Events.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Welcome().setVisible(true);
+                new Events().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnLogin;
+    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane sclEvents;
     // End of variables declaration//GEN-END:variables
 }

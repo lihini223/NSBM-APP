@@ -45,15 +45,21 @@ public class Login extends javax.swing.JFrame {
         setPreferredSize(new java.awt.Dimension(1200, 600));
 
         jPanel1.setBackground(new java.awt.Color(58, 181, 74));
-        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPanel1.setLayout(null);
 
+        lblEmail.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lblEmail.setText("E-mail");
-        jPanel1.add(lblEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(229, 134, -1, -1));
+        jPanel1.add(lblEmail);
+        lblEmail.setBounds(370, 150, 36, 17);
 
+        lblPassword.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lblPassword.setText("Password");
-        jPanel1.add(lblPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(229, 193, -1, -1));
-        jPanel1.add(txtEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(408, 131, 214, -1));
-        jPanel1.add(txtPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(408, 190, 214, -1));
+        jPanel1.add(lblPassword);
+        lblPassword.setBounds(370, 190, 58, 17);
+        jPanel1.add(txtEmail);
+        txtEmail.setBounds(600, 150, 214, 22);
+        jPanel1.add(txtPassword);
+        txtPassword.setBounds(600, 190, 214, 22);
 
         btnLogin.setBackground(new java.awt.Color(26, 86, 158));
         btnLogin.setText("Login");
@@ -62,7 +68,8 @@ public class Login extends javax.swing.JFrame {
                 btnLoginActionPerformed(evt);
             }
         });
-        jPanel1.add(btnLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(252, 312, 370, 67));
+        jPanel1.add(btnLogin);
+        btnLogin.setBounds(390, 290, 370, 67);
 
         lblSignup.setText("Dont have an account ? Signup");
         lblSignup.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -70,10 +77,13 @@ public class Login extends javax.swing.JFrame {
                 lblSignupMouseClicked(evt);
             }
         });
-        jPanel1.add(lblSignup, new org.netbeans.lib.awtextra.AbsoluteConstraints(346, 421, -1, -1));
+        jPanel1.add(lblSignup);
+        lblSignup.setBounds(460, 410, 176, 16);
 
+        lblLogin.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
         lblLogin.setText("Login");
-        jPanel1.add(lblLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(351, 44, -1, -1));
+        jPanel1.add(lblLogin);
+        lblLogin.setBounds(520, 50, 100, 44);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
