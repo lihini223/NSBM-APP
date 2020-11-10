@@ -7,6 +7,8 @@ package events;
 
 import java.awt.Color;
 import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 /**
@@ -15,6 +17,7 @@ import javax.swing.JPanel;
  */
 public class Events extends javax.swing.JFrame {
     JPanel eventsPanel = null;
+    //JLabel lblBackground = null;
 
     /**
      * Creates new form Events
@@ -22,6 +25,12 @@ public class Events extends javax.swing.JFrame {
     public Events() {
         initComponents();
         initializeEvents();
+        //lblBackground = new JLabel("dfghjkl");
+        //lblBackground.setBounds(0, 0, 1200, 400);
+        //lblBackground.setIcon(new ImageIcon(getClass().getResource("imgs\\nsbmlogo.PNG")));
+        //add(lblBackground);
+        //revalidate();
+        //repaint();
     }
     
     public void initializeEvents(){
@@ -30,10 +39,10 @@ public class Events extends javax.swing.JFrame {
         eventsPanel.setBackground(Color.blue);
         eventsPanel.setLayout(new BoxLayout(eventsPanel, BoxLayout.Y_AXIS));
         
-        EventTest e1 = new EventTest("FOSS", "SOC-L101", "Git iganagamuda", "imgs\\nsbmlogo.PNG");
+        EventPanel e1 = new EventPanel("FOSS", "SOC-L101", "Git iganagamuda", "imgs\\nsbmlogo.PNG");
         eventsPanel.add(e1);
         //for(int i = 0;i < 20;i++){
-            EventTest e2 = new EventTest("IEEE", "SOE-002", "Mehetath enna, apenuth mal ganna", "imgs\\nsbmlogo.PNG");
+            EventPanel e2 = new EventPanel("IEEE", "SOE-002", "Mehetath enna, apenuth mal ganna", "imgs\\nsbmlogo.PNG");
             eventsPanel.add(e2);
         //}
         sclEvents.setViewportView(eventsPanel);
@@ -53,12 +62,13 @@ public class Events extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jComboBox1 = new javax.swing.JComboBox<>();
         sclEvents = new javax.swing.JScrollPane();
+        lblBackground = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(1200, 600));
         setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(58, 181, 74));
+        jPanel1.setPreferredSize(new java.awt.Dimension(1200, 600));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
@@ -68,6 +78,9 @@ public class Events extends javax.swing.JFrame {
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "All Events", "FOC", "FOB", "FOE", "Auditorium", "Entertainment" }));
         jPanel1.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 60, 230, 40));
         jPanel1.add(sclEvents, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 150, 950, 370));
+
+        lblBackground.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/nsbmappbackground.jpg"))); // NOI18N
+        jPanel1.add(lblBackground, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1200, 600));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -123,6 +136,7 @@ public class Events extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel lblBackground;
     private javax.swing.JScrollPane sclEvents;
     // End of variables declaration//GEN-END:variables
 }
