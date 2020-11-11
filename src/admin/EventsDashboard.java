@@ -31,6 +31,7 @@ public class EventsDashboard extends javax.swing.JFrame {
         btnViewEvents = new javax.swing.JButton();
         btnAddEvent = new javax.swing.JButton();
         btnRemoveEvent = new javax.swing.JButton();
+        btnHome = new javax.swing.JButton();
         lblBackground = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -58,6 +59,14 @@ public class EventsDashboard extends javax.swing.JFrame {
         btnRemoveEvent.setText("Remove Event");
         jPanel1.add(btnRemoveEvent, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 410, 240, 130));
 
+        btnHome.setText("Home");
+        btnHome.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnHomeActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnHome, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 530, 140, 50));
+
         lblBackground.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/nsbmappbackground.jpg"))); // NOI18N
         jPanel1.add(lblBackground, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1200, 600));
 
@@ -77,9 +86,9 @@ public class EventsDashboard extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnViewEventsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewEventsActionPerformed
-        events.Events eventsForm = new events.Events();
+        events.Events eventsForm = new events.Events(this);
         eventsForm.setVisible(true);
-        this.dispose();
+        this.setVisible(false);
     }//GEN-LAST:event_btnViewEventsActionPerformed
 
     private void btnAddEventActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddEventActionPerformed
@@ -88,6 +97,12 @@ public class EventsDashboard extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_btnAddEventActionPerformed
 
+    private void btnHomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHomeActionPerformed
+        AdminDashboard adminDashboardForm = new AdminDashboard();
+        adminDashboardForm.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnHomeActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -95,6 +110,7 @@ public class EventsDashboard extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAddEvent;
+    private javax.swing.JButton btnHome;
     private javax.swing.JButton btnRemoveEvent;
     private javax.swing.JButton btnViewEvents;
     private javax.swing.JPanel jPanel1;

@@ -10,12 +10,12 @@ package home;
  * @author Rajatha
  */
 public class Dashboard extends javax.swing.JFrame {
-
     /**
      * Creates new form Dashboard
      */
     public Dashboard() {
         initComponents();
+        lblEmail.setText(info.SessionInfo.loggedInUserEmail);
     }
 
     /**
@@ -31,10 +31,10 @@ public class Dashboard extends javax.swing.JFrame {
         btnEvents = new javax.swing.JButton();
         btnTimetable = new javax.swing.JButton();
         btnCMS = new javax.swing.JButton();
+        lblEmail = new javax.swing.JLabel();
         lblBackground = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(1200, 600));
         setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(58, 181, 74));
@@ -53,6 +53,7 @@ public class Dashboard extends javax.swing.JFrame {
 
         btnCMS.setText("File a Complain");
         jPanel1.add(btnCMS, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 330, 280, 120));
+        jPanel1.add(lblEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 50, 220, 60));
 
         lblBackground.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/nsbmappbackground.jpg"))); // NOI18N
         jPanel1.add(lblBackground, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1200, 600));
@@ -73,9 +74,9 @@ public class Dashboard extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnEventsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEventsActionPerformed
-        events.Events eventsForm = new events.Events();
+        events.Events eventsForm = new events.Events(this);
         eventsForm.setVisible(true);
-        this.dispose();
+        this.setVisible(false);
     }//GEN-LAST:event_btnEventsActionPerformed
 
     /**
@@ -89,5 +90,6 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JButton btnTimetable;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lblBackground;
+    private javax.swing.JLabel lblEmail;
     // End of variables declaration//GEN-END:variables
 }
