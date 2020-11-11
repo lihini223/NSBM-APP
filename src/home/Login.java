@@ -105,11 +105,11 @@ public class Login extends javax.swing.JFrame {
         Connection con = null;
         PreparedStatement pstmt = null;
         ResultSet rs = null;
-        String email = txtEmail.getText();
-        String password = txtPassword.getText();
+        String userEmail = txtEmail.getText();
+        String userPassword = txtPassword.getText();
    
         // check if user is admin
-        if(email.equals("admin") && password.equals("admin")){
+        if(userEmail.equals("admin") && userPassword.equals("admin")){
             admin.AdminDashboard adminDashboardForm = new admin.AdminDashboard();
             adminDashboardForm.setVisible(true);
             this.dispose();
@@ -125,6 +125,7 @@ public class Login extends javax.swing.JFrame {
                 rs = pstmt.executeQuery();
                 // if login credentials are valid, redirect to home page
                 if(rs.next()){
+                    info.SessionInfo.loggedInUserEmail = userEmail;
                     Dashboard dashboardForm = new Dashboard();
                     dashboardForm.setVisible(true);
                     this.dispose();
