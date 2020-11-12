@@ -13,6 +13,8 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
+import java.sql.*;
 
 /**
  *
@@ -119,14 +121,94 @@ public class AddEvent extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAddImageActionPerformed
 
     private void btnAddEventActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddEventActionPerformed
+        String title = txtTitle.getText();
+        String venue = txtVenue.getText();
+        String details = txtDetails.getText();
+        String eventId = title + venue;
+        
+        try{
+            if(image != null){
+                saveEvent(eventId, title, venue, details, image);
+            }
+            else{
+                saveEvent(eventId, title, venue, details);
+            }
+            JOptionPane.showMessageDialog(null, "Event Added.");
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null, "Error.");
+        }finally{
+            EventsDashboard eventsDashboardForm = new EventsDashboard();
+            eventsDashboardForm.setVisible(true);
+            this.dispose();
+        }
+    }//GEN-LAST:event_btnAddEventActionPerformed
+    
+    public void saveEvent(String eventId, String title, String venue, String details){
+        Connection conn = null;
+        PreparedStatement pstmt = null;
+        try{
+            Class.forName("com.mysql.jdbc.Driver");
+            conn = DriverManager.getConnection(info.DBInfo.DBUrl, info.DBInfo.DBUsername, info.DBInfo.DBPassword); // database information taken from DBInfo class
+            String query = "insert into events(eventId, title, venue, details) values(?, ?, ?, ?)";
+            pstmt = conn.prepareStatement(query);
+            pstmt.setString(1, eventId);
+            pstmt.setString(2, title);
+            pstmt.setString(3, venue);
+            pstmt.setString(4, details);
+            pstmt.executeUpdate();
+        }
+        catch(Exception e){
+            JOptionPane.showMessageDialog(null, e);
+        }
+        finally{
+            if(conn != null){
+                try {
+                    conn.close();
+                } catch (SQLException ex) {
+                    // ignore exception
+                }
+            }
+        }
+    }
+    
+    public void saveEvent(String eventId, String title, String venue, String details, Image image){
+        String imgName = title + venue;
+        
         try{
             BufferedImage bImage = toBufferedImage(image);
-            File outFile = new File("./src/events/imgs/logo.png");
+            File outFile = new File("./src/events/imgs/" + imgName + ".png");
             ImageIO.write(bImage, "png", outFile);
         }catch(IOException e){
             System.out.println(e);
         }
-    }//GEN-LAST:event_btnAddEventActionPerformed
+        
+        Connection conn = null;
+        PreparedStatement pstmt = null;
+        try{
+            Class.forName("com.mysql.jdbc.Driver");
+            conn = DriverManager.getConnection(info.DBInfo.DBUrl, info.DBInfo.DBUsername, info.DBInfo.DBPassword); // database information taken from DBInfo class
+            String query = "insert into events values(?, ?, ?, ?, ?)";
+            pstmt = conn.prepareStatement(query);
+            pstmt.setString(1, eventId);
+            pstmt.setString(2, title);
+            pstmt.setString(3, venue);
+            pstmt.setString(4, details);
+            pstmt.setString(5, imgName);
+            pstmt.executeUpdate();
+        }
+        catch(Exception e){
+            JOptionPane.showMessageDialog(null, e);
+        }
+        finally{
+            if(conn != null){
+                try {
+                    conn.close();
+                } catch (SQLException ex) {
+                    // ignore exception
+                }
+            }
+        }
+    }
     
     public BufferedImage toBufferedImage(Image img) throws IOException{
         if(img instanceof BufferedImage){

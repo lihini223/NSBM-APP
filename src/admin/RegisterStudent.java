@@ -87,13 +87,13 @@ public class RegisterStudent extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-       Connection con = null;
+        Connection conn = null;
         PreparedStatement pstmt = null;
         try{
             Class.forName("com.mysql.jdbc.Driver");
-            con = DriverManager.getConnection(info.DBInfo.DBUrl, info.DBInfo.DBUsername, info.DBInfo.DBPassword); // database information taken from DBInfo class
+            conn = DriverManager.getConnection(info.DBInfo.DBUrl, info.DBInfo.DBUsername, info.DBInfo.DBPassword); // database information taken from DBInfo class
             String query = "insert into testusers values(?, ?)";
-            pstmt = con.prepareStatement(query);
+            pstmt = conn.prepareStatement(query);
             pstmt.setString(1, txtEmail.getText());
             pstmt.setString(2, txtPassword.getText());
             pstmt.executeUpdate();
@@ -102,9 +102,9 @@ public class RegisterStudent extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, e);
         }
         finally{
-            if(con != null){
+            if(conn != null){
                 try {
-                    con.close();
+                    conn.close();
                 } catch (SQLException ex) {
                     // ignore exception
                 }
