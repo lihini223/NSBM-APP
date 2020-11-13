@@ -3,19 +3,19 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package home;
+package admin;
 
 /**
  *
  * @author Rajatha
  */
-public class Dashboard extends javax.swing.JFrame {
+public class AdminDashboard extends javax.swing.JFrame {
+
     /**
-     * Creates new form Dashboard
+     * Creates new form AdminDashboard
      */
-    public Dashboard() {
+    public AdminDashboard() {
         initComponents();
-        lblEmail.setText(info.SessionInfo.loggedInUserEmail);
     }
 
     /**
@@ -28,10 +28,9 @@ public class Dashboard extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
+        jButton1 = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
         btnEvents = new javax.swing.JButton();
-        btnTimetable = new javax.swing.JButton();
-        btnCMS = new javax.swing.JButton();
-        lblEmail = new javax.swing.JLabel();
         lblBackground = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -40,20 +39,25 @@ public class Dashboard extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(58, 181, 74));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jButton1.setText("Register Student");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 140, 290, 110));
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
+        jLabel1.setText("Admin Dashboard");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 60, -1, -1));
+
         btnEvents.setText("Events");
         btnEvents.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEventsActionPerformed(evt);
             }
         });
-        jPanel1.add(btnEvents, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 160, 280, 120));
-
-        btnTimetable.setText("Timetable");
-        jPanel1.add(btnTimetable, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 170, 260, 110));
-
-        btnCMS.setText("File a Complain");
-        jPanel1.add(btnCMS, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 330, 280, 120));
-        jPanel1.add(lblEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 50, 220, 60));
+        jPanel1.add(btnEvents, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 140, 230, 120));
 
         lblBackground.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/nsbmappbackground.jpg"))); // NOI18N
         jPanel1.add(lblBackground, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1200, 600));
@@ -73,10 +77,16 @@ public class Dashboard extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        RegisterStudent registerStudentForm = new RegisterStudent();
+        registerStudentForm.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     private void btnEventsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEventsActionPerformed
-        events.Events eventsForm = new events.Events(this);
-        eventsForm.setVisible(true);
-        this.setVisible(false);
+        EventsDashboard eventsDashboardForm = new EventsDashboard();
+        eventsDashboardForm.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_btnEventsActionPerformed
 
     /**
@@ -85,11 +95,10 @@ public class Dashboard extends javax.swing.JFrame {
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnCMS;
     private javax.swing.JButton btnEvents;
-    private javax.swing.JButton btnTimetable;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lblBackground;
-    private javax.swing.JLabel lblEmail;
     // End of variables declaration//GEN-END:variables
 }

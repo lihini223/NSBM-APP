@@ -3,19 +3,19 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package home;
+package admin;
 
 /**
  *
  * @author Rajatha
  */
-public class Dashboard extends javax.swing.JFrame {
+public class EventsDashboard extends javax.swing.JFrame {
+
     /**
-     * Creates new form Dashboard
+     * Creates new form Events
      */
-    public Dashboard() {
+    public EventsDashboard() {
         initComponents();
-        lblEmail.setText(info.SessionInfo.loggedInUserEmail);
     }
 
     /**
@@ -28,10 +28,10 @@ public class Dashboard extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        btnEvents = new javax.swing.JButton();
-        btnTimetable = new javax.swing.JButton();
-        btnCMS = new javax.swing.JButton();
-        lblEmail = new javax.swing.JLabel();
+        btnViewEvents = new javax.swing.JButton();
+        btnAddEvent = new javax.swing.JButton();
+        btnRemoveEvent = new javax.swing.JButton();
+        btnHome = new javax.swing.JButton();
         lblBackground = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -40,20 +40,32 @@ public class Dashboard extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(58, 181, 74));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        btnEvents.setText("Events");
-        btnEvents.addActionListener(new java.awt.event.ActionListener() {
+        btnViewEvents.setText("View Events");
+        btnViewEvents.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEventsActionPerformed(evt);
+                btnViewEventsActionPerformed(evt);
             }
         });
-        jPanel1.add(btnEvents, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 160, 280, 120));
+        jPanel1.add(btnViewEvents, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 100, 240, 120));
 
-        btnTimetable.setText("Timetable");
-        jPanel1.add(btnTimetable, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 170, 260, 110));
+        btnAddEvent.setText("Add Event");
+        btnAddEvent.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddEventActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnAddEvent, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 250, 240, 130));
 
-        btnCMS.setText("File a Complain");
-        jPanel1.add(btnCMS, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 330, 280, 120));
-        jPanel1.add(lblEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 50, 220, 60));
+        btnRemoveEvent.setText("Remove Event");
+        jPanel1.add(btnRemoveEvent, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 410, 240, 130));
+
+        btnHome.setText("Home");
+        btnHome.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnHomeActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnHome, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 530, 140, 50));
 
         lblBackground.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/nsbmappbackground.jpg"))); // NOI18N
         jPanel1.add(lblBackground, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1200, 600));
@@ -73,11 +85,23 @@ public class Dashboard extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnEventsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEventsActionPerformed
+    private void btnViewEventsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewEventsActionPerformed
         events.Events eventsForm = new events.Events(this);
         eventsForm.setVisible(true);
         this.setVisible(false);
-    }//GEN-LAST:event_btnEventsActionPerformed
+    }//GEN-LAST:event_btnViewEventsActionPerformed
+
+    private void btnAddEventActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddEventActionPerformed
+        AddEvent addEventForm = new AddEvent();
+        addEventForm.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnAddEventActionPerformed
+
+    private void btnHomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHomeActionPerformed
+        AdminDashboard adminDashboardForm = new AdminDashboard();
+        adminDashboardForm.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnHomeActionPerformed
 
     /**
      * @param args the command line arguments
@@ -85,11 +109,11 @@ public class Dashboard extends javax.swing.JFrame {
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnCMS;
-    private javax.swing.JButton btnEvents;
-    private javax.swing.JButton btnTimetable;
+    private javax.swing.JButton btnAddEvent;
+    private javax.swing.JButton btnHome;
+    private javax.swing.JButton btnRemoveEvent;
+    private javax.swing.JButton btnViewEvents;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lblBackground;
-    private javax.swing.JLabel lblEmail;
     // End of variables declaration//GEN-END:variables
 }
