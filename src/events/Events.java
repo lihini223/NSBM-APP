@@ -69,16 +69,29 @@ public class Events extends javax.swing.JFrame {
                 rs = stmt.executeQuery(query);
                 
                 eventsPanel.removeAll();
-                EventPanel event;
+                
+                Event event;
+                ImagedEvent imagedEvent;
+                
                 while(rs.next()){
                     String title = rs.getString("title");
                     String venue = rs.getString("venue");
+                    String dateTime = rs.getString("date_time");
                     String details = rs.getString("details");
-                    String imgName = rs.getString("imgName");
-                    String imgPath = "imgs\\" + imgName + ".png";
+                    String imgName = rs.getString("image_name");
                     
-                    event = new EventPanel(title, venue, details, imgPath);
-                    eventsPanel.add(event);
+                    //imagedEvent = new ImagedEvent(title, venue, dateTime, details, imgPath);
+                    //eventsPanel.add(imagedEvent);
+                    
+                    if(imgName == null){
+                        event = new Event(title, venue, dateTime, details);
+                        eventsPanel.add(event);
+                    }
+                    else{
+                        String imgPath = "imgs\\" + imgName + ".png";
+                        imagedEvent = new ImagedEvent(title, venue, dateTime, details, imgPath);
+                        eventsPanel.add(imagedEvent);
+                    }
                 }
                 
                 //sclEvents.setViewportView(eventsPanel);
