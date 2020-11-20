@@ -32,6 +32,7 @@ public class Dashboard extends javax.swing.JFrame {
         btnTimetable = new javax.swing.JButton();
         btnCMS = new javax.swing.JButton();
         lblEmail = new javax.swing.JLabel();
+        btnLibrary = new javax.swing.JButton();
         lblBackground = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -52,8 +53,16 @@ public class Dashboard extends javax.swing.JFrame {
         jPanel1.add(btnTimetable, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 170, 260, 110));
 
         btnCMS.setText("File a Complain");
-        jPanel1.add(btnCMS, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 330, 280, 120));
+        jPanel1.add(btnCMS, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 320, 280, 120));
         jPanel1.add(lblEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 50, 220, 60));
+
+        btnLibrary.setText("Library");
+        btnLibrary.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLibraryActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnLibrary, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 320, 250, 120));
 
         lblBackground.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/nsbmappbackground.jpg"))); // NOI18N
         jPanel1.add(lblBackground, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1200, 600));
@@ -79,6 +88,12 @@ public class Dashboard extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_btnEventsActionPerformed
 
+    private void btnLibraryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLibraryActionPerformed
+       library.LibraryDashboard libraryDash = new library.LibraryDashboard();
+       libraryDash.setVisible(true);
+       this.setVisible(false);
+    }//GEN-LAST:event_btnLibraryActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -87,6 +102,7 @@ public class Dashboard extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCMS;
     private javax.swing.JButton btnEvents;
+    private javax.swing.JButton btnLibrary;
     private javax.swing.JButton btnTimetable;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lblBackground;

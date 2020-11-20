@@ -9,12 +9,12 @@ package library;
  *
  * @author Lihini Nisansala
  */
-public class StudyRooms extends javax.swing.JPanel {
+public class StudyRoomBooking extends javax.swing.JFrame {
 
     /**
      * Creates new form StudyRooms
      */
-    public StudyRooms() {
+    public StudyRoomBooking() {
         initComponents();
     }
 
@@ -27,19 +27,143 @@ public class StudyRooms extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
+        pnlBackground = new javax.swing.JPanel();
+        lblAvailableStudyRooms = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        lblBookStudyRoom1 = new javax.swing.JLabel();
+        lblBookStudyRoom2 = new javax.swing.JLabel();
+        pnlBookRoom = new javax.swing.JPanel();
+        lblPurpose = new javax.swing.JLabel();
+        lblStudentName = new javax.swing.JLabel();
+        lblStudentID1 = new javax.swing.JLabel();
+        lblMembers = new javax.swing.JLabel();
+        lblRoomno = new javax.swing.JLabel();
+        lblTimeslot = new javax.swing.JLabel();
+        lblEmail = new javax.swing.JLabel();
+        txtPurpose = new javax.swing.JTextField();
+        txtStudentid = new javax.swing.JTextField();
+        txtStudentName = new javax.swing.JTextField();
+        txtMembers = new javax.swing.JTextField();
+        txtEmail = new javax.swing.JTextField();
+        cmbTimeslot = new javax.swing.JComboBox<>();
+        cmbRoomno = new javax.swing.JComboBox<>();
+        btnCancel = new javax.swing.JButton();
+        btnBook1 = new javax.swing.JButton();
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        pnlBackground.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        lblAvailableStudyRooms.setText("Available Study Rooms");
+        pnlBackground.add(lblAvailableStudyRooms, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, 130, 30));
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(jTable1);
+
+        pnlBackground.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 510, 90));
+
+        lblBookStudyRoom1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        lblBookStudyRoom1.setText("Study Rooms");
+        pnlBackground.add(lblBookStudyRoom1, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 10, 130, 40));
+
+        lblBookStudyRoom2.setText("Book a Study Room");
+        pnlBackground.add(lblBookStudyRoom2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 180, 130, 30));
+
+        pnlBookRoom.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        lblPurpose.setText("Purpose");
+        pnlBookRoom.add(lblPurpose, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 200, -1, -1));
+
+        lblStudentName.setText("Name");
+        pnlBookRoom.add(lblStudentName, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, -1, -1));
+
+        lblStudentID1.setText("Student ID");
+        pnlBookRoom.add(lblStudentID1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, -1, -1));
+
+        lblMembers.setText("No of Members");
+        pnlBookRoom.add(lblMembers, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, -1, -1));
+
+        lblRoomno.setText("Room No");
+        pnlBookRoom.add(lblRoomno, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, -1, -1));
+
+        lblTimeslot.setText("Time Slot");
+        pnlBookRoom.add(lblTimeslot, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, -1, -1));
+
+        lblEmail.setText("Email");
+        pnlBookRoom.add(lblEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 170, -1, -1));
+        pnlBookRoom.add(txtPurpose, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 200, 200, 20));
+        pnlBookRoom.add(txtStudentid, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 20, 200, 20));
+        pnlBookRoom.add(txtStudentName, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 50, 200, 20));
+        pnlBookRoom.add(txtMembers, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 80, 200, 20));
+        pnlBookRoom.add(txtEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 170, 200, 20));
+
+        cmbTimeslot.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        pnlBookRoom.add(cmbTimeslot, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 140, -1, -1));
+
+        cmbRoomno.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        pnlBookRoom.add(cmbRoomno, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 110, -1, -1));
+
+        btnCancel.setText("Cancel");
+        pnlBookRoom.add(btnCancel, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 240, 70, 30));
+
+        btnBook1.setText("BOOK");
+        pnlBookRoom.add(btnBook1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 240, 70, 30));
+
+        pnlBackground.add(pnlBookRoom, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 210, 510, 290));
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addComponent(pnlBackground, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addComponent(pnlBackground, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
+
+        pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    /**
+     * @param args the command line arguments
+     */
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnBook1;
+    private javax.swing.JButton btnCancel;
+    private javax.swing.JComboBox<String> cmbRoomno;
+    private javax.swing.JComboBox<String> cmbTimeslot;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTable1;
+    private javax.swing.JLabel lblAvailableStudyRooms;
+    private javax.swing.JLabel lblBookStudyRoom1;
+    private javax.swing.JLabel lblBookStudyRoom2;
+    private javax.swing.JLabel lblEmail;
+    private javax.swing.JLabel lblMembers;
+    private javax.swing.JLabel lblPurpose;
+    private javax.swing.JLabel lblRoomno;
+    private javax.swing.JLabel lblStudentID1;
+    private javax.swing.JLabel lblStudentName;
+    private javax.swing.JLabel lblTimeslot;
+    private javax.swing.JPanel pnlBackground;
+    private javax.swing.JPanel pnlBookRoom;
+    private javax.swing.JTextField txtEmail;
+    private javax.swing.JTextField txtMembers;
+    private javax.swing.JTextField txtPurpose;
+    private javax.swing.JTextField txtStudentName;
+    private javax.swing.JTextField txtStudentid;
     // End of variables declaration//GEN-END:variables
 }
