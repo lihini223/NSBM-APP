@@ -13,6 +13,8 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
+import java.sql.*;
 
 /**
  *
@@ -48,6 +50,8 @@ public class AddEvent extends javax.swing.JFrame {
         txtDetails = new javax.swing.JTextArea();
         btnAddImage = new javax.swing.JButton();
         lblImage = new javax.swing.JLabel();
+        lblDateTime = new javax.swing.JLabel();
+        txtDateTime = new javax.swing.JTextField();
         lblBackground = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -57,13 +61,13 @@ public class AddEvent extends javax.swing.JFrame {
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         lblTitle.setText("Title");
-        jPanel1.add(lblTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 90, -1, -1));
+        jPanel1.add(lblTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 50, -1, -1));
 
         lblVenue.setText("Venue");
-        jPanel1.add(lblVenue, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 140, -1, -1));
+        jPanel1.add(lblVenue, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 100, -1, -1));
 
         lblDetails.setText("Details");
-        jPanel1.add(lblDetails, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 190, -1, -1));
+        jPanel1.add(lblDetails, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 220, -1, -1));
 
         btnAddEvent.setText("Add Event");
         btnAddEvent.addActionListener(new java.awt.event.ActionListener() {
@@ -72,14 +76,14 @@ public class AddEvent extends javax.swing.JFrame {
             }
         });
         jPanel1.add(btnAddEvent, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 430, 390, 110));
-        jPanel1.add(txtTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 80, 290, 40));
-        jPanel1.add(txtVenue, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 140, 290, 40));
+        jPanel1.add(txtTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 40, 290, 40));
+        jPanel1.add(txtVenue, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 90, 290, 40));
 
         txtDetails.setColumns(20);
         txtDetails.setRows(5);
         jScrollPane1.setViewportView(txtDetails);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 200, 290, 120));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 220, 290, 120));
 
         btnAddImage.setText("Add Image");
         btnAddImage.addActionListener(new java.awt.event.ActionListener() {
@@ -87,10 +91,14 @@ public class AddEvent extends javax.swing.JFrame {
                 btnAddImageActionPerformed(evt);
             }
         });
-        jPanel1.add(btnAddImage, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 340, 210, 60));
+        jPanel1.add(btnAddImage, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 360, 210, 60));
         jPanel1.add(lblImage, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 70, 220, 240));
 
-        lblBackground.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/nsbmappbackground.jpg"))); // NOI18N
+        lblDateTime.setText("Date and Time");
+        jPanel1.add(lblDateTime, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 170, -1, -1));
+        jPanel1.add(txtDateTime, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 160, 280, 40));
+
+        lblBackground.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/nsbmbackground.jpg"))); // NOI18N
         jPanel1.add(lblBackground, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1200, 600));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -119,14 +127,97 @@ public class AddEvent extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAddImageActionPerformed
 
     private void btnAddEventActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddEventActionPerformed
+        String title = txtTitle.getText();
+        String venue = txtVenue.getText();
+        String dateTime = txtDateTime.getText();
+        String details = txtDetails.getText();
+        String eventId = title + venue;
+        
+        try{
+            if(image != null){
+                saveEvent(eventId, title, venue, dateTime, details, image);
+            }
+            else{
+                saveEvent(eventId, title, venue, dateTime, details);
+            }
+            JOptionPane.showMessageDialog(null, "Event Added.");
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null, "Error.");
+        }finally{
+            EventsDashboard eventsDashboardForm = new EventsDashboard();
+            eventsDashboardForm.setVisible(true);
+            this.dispose();
+        }
+    }//GEN-LAST:event_btnAddEventActionPerformed
+    
+    public void saveEvent(String eventId, String title, String venue, String dateTime, String details){
+        Connection conn = null;
+        PreparedStatement pstmt = null;
+        try{
+            Class.forName("com.mysql.jdbc.Driver");
+            conn = DriverManager.getConnection(info.DBInfo.DBUrl, info.DBInfo.DBUsername, info.DBInfo.DBPassword); // database information taken from DBInfo class
+            String query = "insert into events(eventId, title, venue, date_time, details) values(?, ?, ?, ?, ?)";
+            pstmt = conn.prepareStatement(query);
+            pstmt.setString(1, eventId);
+            pstmt.setString(2, title);
+            pstmt.setString(3, venue);
+            pstmt.setString(4, dateTime);
+            pstmt.setString(5, details);
+            pstmt.executeUpdate();
+        }
+        catch(Exception e){
+            JOptionPane.showMessageDialog(null, e);
+        }
+        finally{
+            if(conn != null){
+                try {
+                    conn.close();
+                } catch (SQLException ex) {
+                    // ignore exception
+                }
+            }
+        }
+    }
+    
+    public void saveEvent(String eventId, String title, String venue, String dateTime, String details, Image image){
+        String imgName = title + venue;
+        
         try{
             BufferedImage bImage = toBufferedImage(image);
-            File outFile = new File("./src/events/imgs/logo.png");
+            File outFile = new File("./src/events/imgs/" + imgName + ".png");
             ImageIO.write(bImage, "png", outFile);
         }catch(IOException e){
             System.out.println(e);
         }
-    }//GEN-LAST:event_btnAddEventActionPerformed
+        
+        Connection conn = null;
+        PreparedStatement pstmt = null;
+        try{
+            Class.forName("com.mysql.jdbc.Driver");
+            conn = DriverManager.getConnection(info.DBInfo.DBUrl, info.DBInfo.DBUsername, info.DBInfo.DBPassword); // database information taken from DBInfo class
+            String query = "insert into events values(?, ?, ?, ?, ?, ?)";
+            pstmt = conn.prepareStatement(query);
+            pstmt.setString(1, eventId);
+            pstmt.setString(2, title);
+            pstmt.setString(3, venue);
+            pstmt.setString(4, dateTime);
+            pstmt.setString(5, details);
+            pstmt.setString(6, imgName);
+            pstmt.executeUpdate();
+        }
+        catch(Exception e){
+            JOptionPane.showMessageDialog(null, e);
+        }
+        finally{
+            if(conn != null){
+                try {
+                    conn.close();
+                } catch (SQLException ex) {
+                    // ignore exception
+                }
+            }
+        }
+    }
     
     public BufferedImage toBufferedImage(Image img) throws IOException{
         if(img instanceof BufferedImage){
@@ -152,10 +243,12 @@ public class AddEvent extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblBackground;
+    private javax.swing.JLabel lblDateTime;
     private javax.swing.JLabel lblDetails;
     private javax.swing.JLabel lblImage;
     private javax.swing.JLabel lblTitle;
     private javax.swing.JLabel lblVenue;
+    private javax.swing.JTextField txtDateTime;
     private javax.swing.JTextArea txtDetails;
     private javax.swing.JTextField txtTitle;
     private javax.swing.JTextField txtVenue;

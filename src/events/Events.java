@@ -11,6 +11,8 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import java.sql.*;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -42,14 +44,75 @@ public class Events extends javax.swing.JFrame {
         eventsPanel.setBackground(Color.blue);
         eventsPanel.setLayout(new BoxLayout(eventsPanel, BoxLayout.Y_AXIS));
         
-        EventPanel e1 = new EventPanel("FOSS", "SOC-L101", "Git iganagamuda", "imgs\\nsbmlogo.PNG");
-        eventsPanel.add(e1);
+        //EventPanel e1 = new EventPanel("FOSS", "SOC-L101", "Git iganagamuda", "imgs\\nsbmlogo.PNG");
+        //eventsPanel.add(e1);
         //for(int i = 0;i < 20;i++){
-            EventPanel e2 = new EventPanel("IEEE", "SOE-002", "Mehetath enna, apenuth mal ganna", "imgs\\nsbmlogo.PNG");
-            eventsPanel.add(e2);
+            //EventPanel e2 = new EventPanel("IEEE", "SOE-002", "Mehetath enna, apenuth mal ganna", "imgs\\nsbmlogo.PNG");
+            //eventsPanel.add(e2);
         //}
+        
+        fetchEvents();
+        
         sclEvents.setViewportView(eventsPanel);
-        revalidate();
+        //revalidate();
+    }
+    
+    public void fetchEvents(){
+        Connection con = null;
+        Statement stmt = null;
+        ResultSet rs = null;
+        try{
+                Class.forName("com.mysql.jdbc.Driver");
+                con = DriverManager.getConnection(info.DBInfo.DBUrl, info.DBInfo.DBUsername, info.DBInfo.DBPassword); // database information taken from DBInfo class
+                String query = "select * from events";
+                stmt = con.createStatement();
+                rs = stmt.executeQuery(query);
+                
+                eventsPanel.removeAll();
+                
+                Event event;
+                ImagedEvent imagedEvent;
+                
+                while(rs.next()){
+                    String title = rs.getString("title");
+                    String venue = rs.getString("venue");
+                    String dateTime = rs.getString("date_time");
+                    String details = rs.getString("details");
+                    String imgName = rs.getString("image_name");
+                    
+                    //imagedEvent = new ImagedEvent(title, venue, dateTime, details, imgPath);
+                    //eventsPanel.add(imagedEvent);
+                    
+                    if(imgName == null){
+                        event = new Event(title, venue, dateTime, details);
+                        eventsPanel.add(event);
+                    }
+                    else{
+                        String imgPath = "imgs\\" + imgName + ".png";
+                        imagedEvent = new ImagedEvent(title, venue, dateTime, details, imgPath);
+                        eventsPanel.add(imagedEvent);
+                    }
+                }
+                
+                //sclEvents.setViewportView(eventsPanel);
+                eventsPanel.revalidate();
+            }
+            catch(Exception e){
+                JOptionPane.showMessageDialog(null, "Error.");
+            }
+            finally{
+                if(con != null){
+                    try {
+                        con.close();
+                    } catch (SQLException ex) {
+                        // ignore exception
+                    }
+                }
+            }
+    }
+    
+    public void fetchEvents(String category){
+        
     }
 
     /**
@@ -91,7 +154,7 @@ public class Events extends javax.swing.JFrame {
         });
         jPanel1.add(btnBack, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 540, 120, 40));
 
-        lblBackground.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/nsbmappbackground.jpg"))); // NOI18N
+        lblBackground.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/nsbmbackground.jpg"))); // NOI18N
         jPanel1.add(lblBackground, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1200, 600));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

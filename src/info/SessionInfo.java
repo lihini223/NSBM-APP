@@ -12,4 +12,6 @@ package info;
 public class SessionInfo {
     public static String loggedInUserEmail = "";
     public static String loggedInUser = "";
+    public static String loggedInUserBatch = "";
+    public static String loggedInUserFaculty = "";
 }
