@@ -162,7 +162,7 @@
         <Component class="javax.swing.JLabel" name="lblBackground">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/resources/nsbmappbackground.jpg"/>
+              <Image iconType="3" name="/resources/nsbmbackground.jpg"/>
             </Property>
           </Properties>
           <Constraints>

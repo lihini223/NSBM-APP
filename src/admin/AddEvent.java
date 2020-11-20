@@ -98,7 +98,7 @@ public class AddEvent extends javax.swing.JFrame {
         jPanel1.add(lblDateTime, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 170, -1, -1));
         jPanel1.add(txtDateTime, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 160, 280, 40));
 
-        lblBackground.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/nsbmappbackground.jpg"))); // NOI18N
+        lblBackground.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/nsbmbackground.jpg"))); // NOI18N
         jPanel1.add(lblBackground, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1200, 600));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

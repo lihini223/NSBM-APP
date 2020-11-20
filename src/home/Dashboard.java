@@ -16,6 +16,9 @@ public class Dashboard extends javax.swing.JFrame {
     public Dashboard() {
         initComponents();
         lblEmail.setText(info.SessionInfo.loggedInUserEmail);
+        lblName.setText(info.SessionInfo.loggedInUser);
+        lblBatch.setText(info.SessionInfo.loggedInUserBatch);
+        lblFaculty.setText(info.SessionInfo.loggedInUserFaculty);
     }
 
     /**
@@ -32,6 +35,9 @@ public class Dashboard extends javax.swing.JFrame {
         btnTimetable = new javax.swing.JButton();
         btnCMS = new javax.swing.JButton();
         lblEmail = new javax.swing.JLabel();
+        lblName = new javax.swing.JLabel();
+        lblBatch = new javax.swing.JLabel();
+        lblFaculty = new javax.swing.JLabel();
         lblBackground = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -49,13 +55,21 @@ public class Dashboard extends javax.swing.JFrame {
         jPanel1.add(btnEvents, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 160, 280, 120));
 
         btnTimetable.setText("Timetable");
-        jPanel1.add(btnTimetable, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 170, 260, 110));
+        btnTimetable.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTimetableActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnTimetable, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 160, 260, 110));
 
         btnCMS.setText("File a Complain");
         jPanel1.add(btnCMS, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 330, 280, 120));
-        jPanel1.add(lblEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 50, 220, 60));
+        jPanel1.add(lblEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 50, 220, 60));
+        jPanel1.add(lblName, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 60, 190, 50));
+        jPanel1.add(lblBatch, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 80, 150, 40));
+        jPanel1.add(lblFaculty, new org.netbeans.lib.awtextra.AbsoluteConstraints(1000, 70, 130, 40));
 
-        lblBackground.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/nsbmappbackground.jpg"))); // NOI18N
+        lblBackground.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/nsbmbackground.jpg"))); // NOI18N
         jPanel1.add(lblBackground, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1200, 600));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -79,6 +93,12 @@ public class Dashboard extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_btnEventsActionPerformed
 
+    private void btnTimetableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimetableActionPerformed
+        timetables.Student_Time_Table timetableForm = new timetables.Student_Time_Table();
+        timetableForm.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnTimetableActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -90,6 +110,9 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JButton btnTimetable;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lblBackground;
+    private javax.swing.JLabel lblBatch;
     private javax.swing.JLabel lblEmail;
+    private javax.swing.JLabel lblFaculty;
+    private javax.swing.JLabel lblName;
     // End of variables declaration//GEN-END:variables
 }
