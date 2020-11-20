@@ -31,6 +31,7 @@ public class AdminDashboard extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         btnEvents = new javax.swing.JButton();
+        btnTimetable = new javax.swing.JButton();
         lblBackground = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -59,7 +60,15 @@ public class AdminDashboard extends javax.swing.JFrame {
         });
         jPanel1.add(btnEvents, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 140, 230, 120));
 
-        lblBackground.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/nsbmappbackground.jpg"))); // NOI18N
+        btnTimetable.setText("Timetable");
+        btnTimetable.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTimetableActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnTimetable, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 300, 270, 90));
+
+        lblBackground.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/nsbmbackground.jpg"))); // NOI18N
         jPanel1.add(lblBackground, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1200, 600));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -89,6 +98,12 @@ public class AdminDashboard extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_btnEventsActionPerformed
 
+    private void btnTimetableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimetableActionPerformed
+        timetables.Admin_Time_Table timetableForm = new timetables.Admin_Time_Table();
+        timetableForm.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnTimetableActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -96,6 +111,7 @@ public class AdminDashboard extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnEvents;
+    private javax.swing.JButton btnTimetable;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;

@@ -67,7 +67,7 @@ public class EventsDashboard extends javax.swing.JFrame {
         });
         jPanel1.add(btnHome, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 530, 140, 50));
 
-        lblBackground.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/nsbmappbackground.jpg"))); // NOI18N
+        lblBackground.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/nsbmbackground.jpg"))); // NOI18N
         jPanel1.add(lblBackground, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1200, 600));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
