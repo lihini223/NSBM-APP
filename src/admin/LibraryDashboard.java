@@ -27,17 +27,29 @@ public class LibraryDashboard extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        LibdashPanel = new javax.swing.JPanel();
+        btnStudyRooms = new javax.swing.JButton();
+        btnBooks = new javax.swing.JButton();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        LibdashPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        btnStudyRooms.setText("Study Rooms");
+        LibdashPanel.add(btnStudyRooms, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 280, 180, 90));
+
+        btnBooks.setText("Books");
+        LibdashPanel.add(btnBooks, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 280, 180, 90));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addComponent(LibdashPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addComponent(LibdashPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -79,5 +91,8 @@ public class LibraryDashboard extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel LibdashPanel;
+    private javax.swing.JButton btnBooks;
+    private javax.swing.JButton btnStudyRooms;
     // End of variables declaration//GEN-END:variables
 }

@@ -84,6 +84,18 @@
             </Constraint>
           </Constraints>
         </Component>
+
+        <Component class="javax.swing.JButton" name="btnLibrary">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Library"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnLibraryActionPerformed"/>
+          </Events>
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+              <AbsoluteConstraints x="740" y="150" width="250" height="120"/>
+
         <Component class="javax.swing.JButton" name="btnTimetable">
           <Properties>
             <Property name="text" type="java.lang.String" value="Timetable"/>
@@ -94,6 +106,7 @@
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
               <AbsoluteConstraints x="120" y="300" width="270" height="90"/>
+
             </Constraint>
           </Constraints>
         </Component>
