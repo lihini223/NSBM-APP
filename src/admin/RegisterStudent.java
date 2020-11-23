@@ -87,7 +87,7 @@ public class RegisterStudent extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-       Connection con = null;
+        Connection con = null;
         PreparedStatement pstmt = null;
         try{
             Class.forName("com.mysql.jdbc.Driver");
