@@ -5,6 +5,16 @@
  */
 package library;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Lihini Nisansala
@@ -16,6 +26,7 @@ public class Books extends javax.swing.JFrame {
      */
     public Books() {
         initComponents();
+        fetchData();
     }
 
     /**
@@ -30,10 +41,10 @@ public class Books extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        btnShowsr = new javax.swing.JButton();
-        jTextField1 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        tblAvailableBooks = new javax.swing.JTable();
+        btnShowAvailableBooks = new javax.swing.JButton();
+        txtBookName = new javax.swing.JTextField();
+        btnSearch = new javax.swing.JButton();
         lblBooks = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -42,7 +53,7 @@ public class Books extends javax.swing.JFrame {
 
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tblAvailableBooks.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -53,22 +64,32 @@ public class Books extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tblAvailableBooks);
 
         jPanel2.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, 500, 90));
 
-        btnShowsr.setText("Show Available Books");
-        jPanel2.add(btnShowsr, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 180, 220, 50));
-
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        btnShowAvailableBooks.setText("Show Available Books");
+        btnShowAvailableBooks.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                btnShowAvailableBooksActionPerformed(evt);
             }
         });
-        jPanel2.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, 370, 30));
+        jPanel2.add(btnShowAvailableBooks, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 180, 220, 50));
 
-        jButton1.setText("search");
-        jPanel2.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 30, 80, 30));
+        txtBookName.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtBookNameActionPerformed(evt);
+            }
+        });
+        jPanel2.add(txtBookName, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, 370, 30));
+
+        btnSearch.setText("search");
+        btnSearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSearchActionPerformed(evt);
+            }
+        });
+        jPanel2.add(btnSearch, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 30, 80, 30));
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 90, 600, 260));
 
@@ -90,25 +111,86 @@ public class Books extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void txtBookNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBookNameActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_txtBookNameActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
+    private void btnShowAvailableBooksActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnShowAvailableBooksActionPerformed
+        // TODO add your handling code here:
+        fetchData();
+    }//GEN-LAST:event_btnShowAvailableBooksActionPerformed
 
+    private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnSearchActionPerformed
+
+private void fetchData() {
+        Connection con = null;
+        Statement stmt = null;
+        ResultSet rs = null;
+
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            con = DriverManager.getConnection(info.DBInfo.DBUrl, info.DBInfo.DBUsername, info.DBInfo.DBPassword); // database information taken from DBInfo class
+
+            int rows = 0;
+            int rowIndex = 0;
+
+            String qry = "select * from books";
+
+            stmt = con.createStatement();
+            rs = stmt.executeQuery(qry);
+
+            if (rs.next()) {
+                rs.last();
+                rows = rs.getRow();
+                rs.beforeFirst();
+            }
+
+            String[][] data = new String[rows][4];
+
+            while (rs.next()) {
+                data[rowIndex][0] = rs.getString(1);
+                data[rowIndex][1] = rs.getString(2);
+                data[rowIndex][2] = rs.getString(3);
+                data[rowIndex][3] = rs.getString(4);
+                
+                rowIndex++;
+            }
+
+            String[] cols = {"ISBN", "Name", "Author", "Edition"};
+
+            DefaultTableModel model = new DefaultTableModel(data, cols);
+
+            tblAvailableBooks.setModel(model);
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        } finally {
+            try {
+                rs.close();
+                stmt.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(StudyRoomBooking.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+            if (con != null) {
+                try {
+                    con.close();
+                } catch (SQLException ex) {
+                    // ignore exception
+                }
+            }
+        }
     }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnShowsr;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btnSearch;
+    private javax.swing.JButton btnShowAvailableBooks;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel lblBooks;
+    private javax.swing.JTable tblAvailableBooks;
+    private javax.swing.JTextField txtBookName;
     // End of variables declaration//GEN-END:variables
 }

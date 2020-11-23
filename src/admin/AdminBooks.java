@@ -5,6 +5,18 @@
  */
 package admin;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import library.StudyRoomBooking;
+
 /**
  *
  * @author Lihini Nisansala
@@ -16,6 +28,7 @@ public class AdminBooks extends javax.swing.JFrame {
      */
     public AdminBooks() {
         initComponents();
+        fetchData();
     }
 
     /**
@@ -28,29 +41,122 @@ public class AdminBooks extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        btnBooks = new javax.swing.JButton();
-        btnBooks1 = new javax.swing.JButton();
+        jPanel2 = new javax.swing.JPanel();
+        btnCancel = new javax.swing.JButton();
+        txtEdition = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        txtBookName = new javax.swing.JTextField();
+        txtISBN = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        txtAuthor = new javax.swing.JTextField();
+        btnAddBook = new javax.swing.JButton();
+        jPanel3 = new javax.swing.JPanel();
+        jLabel6 = new javax.swing.JLabel();
+        txtIsbn = new javax.swing.JTextField();
+        btnRemoveBook = new javax.swing.JButton();
+        jLabel7 = new javax.swing.JLabel();
+        jPanel4 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tblBooks = new javax.swing.JTable();
+        btnShowBooks = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        btnBooks.setText("Remove Books");
-        btnBooks.addActionListener(new java.awt.event.ActionListener() {
+        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        btnCancel.setText("Cancel");
+        btnCancel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBooksActionPerformed(evt);
+                btnCancelActionPerformed(evt);
             }
         });
-        jPanel1.add(btnBooks, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 100, 180, 90));
+        jPanel2.add(btnCancel, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 260, 100, 30));
+        jPanel2.add(txtEdition, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 200, 110, 30));
 
-        btnBooks1.setText("Add Books");
-        jPanel1.add(btnBooks1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 100, 180, 90));
+        jLabel1.setText("Register Books");
+        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, -1, -1));
+
+        jLabel2.setText("Edition");
+        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 210, -1, -1));
+
+        jLabel3.setText("Book Name");
+        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 120, -1, -1));
+        jPanel2.add(txtBookName, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 110, 110, 30));
+        jPanel2.add(txtISBN, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 60, 110, 30));
+
+        jLabel4.setText("ISBN");
+        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, -1, -1));
+
+        jLabel5.setText("Author");
+        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 160, -1, -1));
+        jPanel2.add(txtAuthor, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 150, 110, 30));
+
+        btnAddBook.setText("Add Book");
+        btnAddBook.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddBookActionPerformed(evt);
+            }
+        });
+        jPanel2.add(btnAddBook, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 260, 100, 30));
+
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 280, 310));
+
+        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel6.setText("Remove Books");
+        jPanel3.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, -1, -1));
+        jPanel3.add(txtIsbn, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, 110, 30));
+
+        btnRemoveBook.setText("Remove Book");
+        btnRemoveBook.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRemoveBookActionPerformed(evt);
+            }
+        });
+        jPanel3.add(btnRemoveBook, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 50, 100, 30));
+
+        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 410, 310, 160));
+
+        jLabel7.setText("Available Books");
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 40, -1, -1));
+
+        jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        tblBooks.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(tblBooks);
+
+        jPanel4.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 520, 90));
+
+        btnShowBooks.setText("Show Books");
+        btnShowBooks.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnShowBooksActionPerformed(evt);
+            }
+        });
+        jPanel4.add(btnShowBooks, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 180, 100, 30));
+
+        jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 30, 550, 400));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 954, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
@@ -58,23 +164,189 @@ public class AdminBooks extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 656, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(0, 22, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnBooksActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBooksActionPerformed
+    private void btnShowBooksActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnShowBooksActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnBooksActionPerformed
+        fetchData();
+    }//GEN-LAST:event_btnShowBooksActionPerformed
 
+    private void btnAddBookActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddBookActionPerformed
+        // TODO add your handling code here:
+        String ISBN = txtISBN.getText();
+        String BName = txtBookName.getText();
+        String author = txtAuthor.getText();
+        String edition = txtEdition.getText();
+        
+        Connection con = null;
+        PreparedStatement pstmt = null;
+
+        
+            try {
+                Class.forName("com.mysql.jdbc.Driver");
+                con = DriverManager.getConnection(info.DBInfo.DBUrl, info.DBInfo.DBUsername, info.DBInfo.DBPassword); // database information taken from DBInfo class
+                String query = "insert into books values(?, ?, ?, ?)";
+                pstmt = con.prepareStatement(query);
+                pstmt.setString(1, ISBN);
+                pstmt.setString(2, BName);
+                pstmt.setString(3, author);
+                pstmt.setString(4, edition);
+
+
+                pstmt.executeUpdate();
+
+                clearComponents();
+
+        
+                
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, e);
+            } finally {
+                if (con != null) {
+                    try {
+                        con.close();
+                    } catch (SQLException ex) {
+                        // ignore exception
+                    }
+                }
+            }
+
+
+
+    }//GEN-LAST:event_btnAddBookActionPerformed
+
+    private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
+        // TODO add your handling code here:
+        clearComponents();
+    }//GEN-LAST:event_btnCancelActionPerformed
+
+    private void btnRemoveBookActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoveBookActionPerformed
+        // TODO add your handling code here:
+        Connection con = null;
+        Statement stmt = null;
+        String ISBN = txtISBN.getText();
+
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            con = DriverManager.getConnection(info.DBInfo.DBUrl, info.DBInfo.DBUsername, info.DBInfo.DBPassword); // database information taken from DBInfo class
+            String query = "delete from books where ISBN = '"+ISBN+"' ";
+
+            stmt = con.createStatement();
+            stmt.executeUpdate(query);
+            
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null, e);
+        }finally {
+            if (con != null) {
+                try {
+                    con.close();
+                } catch (SQLException ex) {
+                    // ignore exception
+                }
+            }
+        }
+        
+        txtISBN.setText("");
+    }//GEN-LAST:event_btnRemoveBookActionPerformed
+
+    private void clearComponents() {
+        txtISBN.setText("");
+        txtBookName.setText("");
+        txtAuthor.setText("");
+        txtEdition.setText("");
+      
+
+    }
+        
+    private void fetchData() {
+        Connection con = null;
+        Statement stmt = null;
+        ResultSet rs = null;
+
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            con = DriverManager.getConnection(info.DBInfo.DBUrl, info.DBInfo.DBUsername, info.DBInfo.DBPassword); // database information taken from DBInfo class
+
+            int rows = 0;
+            int rowIndex = 0;
+
+            String qry = "select * from books";
+
+            stmt = con.createStatement();
+            rs = stmt.executeQuery(qry);
+
+            if (rs.next()) {
+                rs.last();
+                rows = rs.getRow();
+                rs.beforeFirst();
+            }
+
+            String[][] data = new String[rows][4];
+
+            while (rs.next()) {
+                data[rowIndex][0] = rs.getString(1);
+                data[rowIndex][1] = rs.getString(2);
+                data[rowIndex][2] = rs.getString(3);
+                data[rowIndex][3] = rs.getString(4);
+                
+                rowIndex++;
+            }
+
+            String[] cols = {"ISBN", "Name", "Author", "Edition"};
+
+            DefaultTableModel model = new DefaultTableModel(data, cols);
+
+            tblBooks.setModel(model);
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        } finally {
+            try {
+                rs.close();
+                stmt.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(StudyRoomBooking.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+            if (con != null) {
+                try {
+                    con.close();
+                } catch (SQLException ex) {
+                    // ignore exception
+                }
+            }
+        }
+    }
     /**
      * @param args the command line arguments
      */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnBooks;
-    private javax.swing.JButton btnBooks1;
+    private javax.swing.JButton btnAddBook;
+    private javax.swing.JButton btnCancel;
+    private javax.swing.JButton btnRemoveBook;
+    private javax.swing.JButton btnShowBooks;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable tblBooks;
+    private javax.swing.JTextField txtAuthor;
+    private javax.swing.JTextField txtBookName;
+    private javax.swing.JTextField txtEdition;
+    private javax.swing.JTextField txtISBN;
+    private javax.swing.JTextField txtIsbn;
     // End of variables declaration//GEN-END:variables
 }

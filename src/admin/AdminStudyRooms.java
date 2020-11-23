@@ -5,6 +5,17 @@
  */
 package admin;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import library.StudyRoomBooking;
+
 /**
  *
  * @author Lihini Nisansala
@@ -16,6 +27,7 @@ public class AdminStudyRooms extends javax.swing.JFrame {
      */
     public AdminStudyRooms() {
         initComponents(); 
+        fetchData();
     }
 
     /**
@@ -29,11 +41,15 @@ public class AdminStudyRooms extends javax.swing.JFrame {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         tblBookingDetails = new javax.swing.JTable();
+        btnRemoveBooking = new javax.swing.JButton();
         btnAvailableall = new javax.swing.JButton();
-        btnAvailableall1 = new javax.swing.JButton();
         lblBookingDetails = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        btnAvailableall2 = new javax.swing.JButton();
+        txtstudentID = new javax.swing.JTextField();
+        btnShowBooking = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tblAvailableStudyRooms = new javax.swing.JTable();
+        btnShowsr = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -53,74 +69,222 @@ public class AdminStudyRooms extends javax.swing.JFrame {
 
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 520, 90));
 
+        btnRemoveBooking.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        btnRemoveBooking.setText("Remove Booking");
+        btnRemoveBooking.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRemoveBookingActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnRemoveBooking, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 190, 210, 40));
+
         btnAvailableall.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        btnAvailableall.setText("Remove Booking");
+        btnAvailableall.setText("Available All ");
         btnAvailableall.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAvailableallActionPerformed(evt);
             }
         });
-        getContentPane().add(btnAvailableall, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 190, 210, 40));
-
-        btnAvailableall1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        btnAvailableall1.setText("Available All ");
-        btnAvailableall1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAvailableall1ActionPerformed(evt);
-            }
-        });
-        getContentPane().add(btnAvailableall1, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 130, 170, 40));
+        getContentPane().add(btnAvailableall, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 410, 180, 50));
 
         lblBookingDetails.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         lblBookingDetails.setText("Booking Details");
         getContentPane().add(lblBookingDetails, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, -1, -1));
 
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        txtstudentID.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                txtstudentIDActionPerformed(evt);
             }
         });
-        getContentPane().add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 190, 230, 40));
+        getContentPane().add(txtstudentID, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 190, 230, 40));
 
-        btnAvailableall2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        btnAvailableall2.setText("Show Bookings");
-        btnAvailableall2.addActionListener(new java.awt.event.ActionListener() {
+        btnShowBooking.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        btnShowBooking.setText("Show Bookings");
+        btnShowBooking.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAvailableall2ActionPerformed(evt);
+                btnShowBookingActionPerformed(evt);
             }
         });
-        getContentPane().add(btnAvailableall2, new org.netbeans.lib.awtextra.AbsoluteConstraints(549, 81, 170, 40));
+        getContentPane().add(btnShowBooking, new org.netbeans.lib.awtextra.AbsoluteConstraints(549, 81, 170, 40));
+
+        jLabel1.setText("Study Rooms");
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 260, -1, -1));
+
+        tblAvailableStudyRooms.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane2.setViewportView(tblAvailableStudyRooms);
+
+        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 290, 510, 110));
+
+        btnShowsr.setText("Show Available Study Rooms");
+        btnShowsr.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnShowsrActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnShowsr, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 410, 220, 50));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnRemoveBookingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoveBookingActionPerformed
+        // TODO add your handling code here:
+         Connection con = null;
+        Statement stmt = null;
+        String studentID = txtstudentID.getText();
+
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            con = DriverManager.getConnection(info.DBInfo.DBUrl, info.DBInfo.DBUsername, info.DBInfo.DBPassword); // database information taken from DBInfo class
+            String query = "delete from booking where student_id = '"+studentID+"' ";
+
+            stmt = con.createStatement();
+            stmt.executeUpdate(query);
+            
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null, e);
+        }finally {
+            if (con != null) {
+                try {
+                    con.close();
+                } catch (SQLException ex) {
+                    // ignore exception
+                }
+            }
+        }
+        
+        txtstudentID.setText("");
+    }//GEN-LAST:event_btnRemoveBookingActionPerformed
+
     private void btnAvailableallActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAvailableallActionPerformed
         // TODO add your handling code here:
+        Connection con = null;
+        Statement stmt = null;
+        String studentID = txtstudentID.getText();
+
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            con = DriverManager.getConnection(info.DBInfo.DBUrl, info.DBInfo.DBUsername, info.DBInfo.DBPassword); // database information taken from DBInfo class
+            String query = "update study_rooms set Morning_Session = 'A', Evening_Session = 'A' ";
+
+            stmt = con.createStatement();
+            stmt.executeUpdate(query);
+            
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null, e);
+        }finally {
+            if (con != null) {
+                try {
+                    con.close();
+                } catch (SQLException ex) {
+                    // ignore exception
+                }
+            }
+        }
+        
     }//GEN-LAST:event_btnAvailableallActionPerformed
 
-    private void btnAvailableall1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAvailableall1ActionPerformed
+    private void txtstudentIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtstudentIDActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnAvailableall1ActionPerformed
+    }//GEN-LAST:event_txtstudentIDActionPerformed
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void btnShowBookingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnShowBookingActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+        fetchData();
+    }//GEN-LAST:event_btnShowBookingActionPerformed
 
-    private void btnAvailableall2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAvailableall2ActionPerformed
+    private void btnShowsrActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnShowsrActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnAvailableall2ActionPerformed
+        fetchData();
+    }//GEN-LAST:event_btnShowsrActionPerformed
 
+    
+    private void fetchData() {
+        Connection con = null;
+        Statement stmt = null;
+        ResultSet rs = null;
+
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            con = DriverManager.getConnection(info.DBInfo.DBUrl, info.DBInfo.DBUsername, info.DBInfo.DBPassword); // database information taken from DBInfo class
+
+            int rows = 0;
+            int rowIndex = 0;
+
+            String qry = "select * from booking";
+
+            stmt = con.createStatement();
+            rs = stmt.executeQuery(qry);
+
+            if (rs.next()) {
+                rs.last();
+                rows = rs.getRow();
+                rs.beforeFirst();
+            }
+
+            String[][] data = new String[rows][7];
+
+            while (rs.next()) {
+                data[rowIndex][0] = rs.getString(1);
+                data[rowIndex][1] = rs.getString(2);
+                data[rowIndex][2] = rs.getString(3);
+                data[rowIndex][3] = rs.getString(4);
+                data[rowIndex][4] = rs.getString(5);
+                data[rowIndex][5] = rs.getString(6);
+                data[rowIndex][6] = rs.getString(7);
+                
+                rowIndex++;
+            }
+
+            String[] cols = {"student_id", "name", "no_of_members", "room_no", "time_slot", "email", "purpose"};
+
+            DefaultTableModel model = new DefaultTableModel(data, cols);
+
+            tblBookingDetails.setModel(model);
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        } finally {
+            try {
+                rs.close();
+                stmt.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(StudyRoomBooking.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+            if (con != null) {
+                try {
+                    con.close();
+                } catch (SQLException ex) {
+                    // ignore exception
+                }
+            }
+        }
+    }
     /**
      * @param args the command line arguments
      */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAvailableall;
-    private javax.swing.JButton btnAvailableall1;
-    private javax.swing.JButton btnAvailableall2;
+    private javax.swing.JButton btnRemoveBooking;
+    private javax.swing.JButton btnShowBooking;
+    private javax.swing.JButton btnShowsr;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lblBookingDetails;
+    private javax.swing.JTable tblAvailableStudyRooms;
     private javax.swing.JTable tblBookingDetails;
+    private javax.swing.JTextField txtstudentID;
     // End of variables declaration//GEN-END:variables
 }

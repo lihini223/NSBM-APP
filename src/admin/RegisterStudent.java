@@ -116,13 +116,10 @@ public class RegisterStudent extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-<<<<<<< HEAD
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        Connection con = null;
-=======
+
     private void btnRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegisterActionPerformed
         Connection conn = null;
->>>>>>> ba5388a95bee213a346bb13d2071fe67a1ab90e2
+
         PreparedStatement pstmt = null;
         
         try{
