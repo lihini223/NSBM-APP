@@ -36,20 +36,20 @@ public class LibraryDashboard extends javax.swing.JFrame {
         LibdashPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         btnStudyRooms.setText("Study Rooms");
-        LibdashPanel.add(btnStudyRooms, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 280, 180, 90));
+        LibdashPanel.add(btnStudyRooms, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 150, 180, 90));
 
         btnBooks.setText("Books");
-        LibdashPanel.add(btnBooks, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 280, 180, 90));
+        LibdashPanel.add(btnBooks, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 150, 180, 90));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(LibdashPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(LibdashPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 857, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(LibdashPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(LibdashPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 494, Short.MAX_VALUE)
         );
 
         pack();

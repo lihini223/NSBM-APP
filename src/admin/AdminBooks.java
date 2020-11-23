@@ -41,7 +41,7 @@ public class AdminBooks extends javax.swing.JFrame {
                 btnBooksActionPerformed(evt);
             }
         });
-        jPanel1.add(btnBooks, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 230, 180, 90));
+        jPanel1.add(btnBooks, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 100, 180, 90));
 
         btnBooks1.setText("Add Books");
         jPanel1.add(btnBooks1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 100, 180, 90));

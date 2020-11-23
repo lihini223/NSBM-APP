@@ -51,7 +51,7 @@ public class AdminStudyRooms extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(tblBookingDetails);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 520, 170));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 520, 90));
 
         btnAvailableall.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         btnAvailableall.setText("Remove Booking");
@@ -60,7 +60,7 @@ public class AdminStudyRooms extends javax.swing.JFrame {
                 btnAvailableallActionPerformed(evt);
             }
         });
-        getContentPane().add(btnAvailableall, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 270, 210, 40));
+        getContentPane().add(btnAvailableall, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 190, 210, 40));
 
         btnAvailableall1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         btnAvailableall1.setText("Available All ");
@@ -80,7 +80,7 @@ public class AdminStudyRooms extends javax.swing.JFrame {
                 jTextField1ActionPerformed(evt);
             }
         });
-        getContentPane().add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 270, 230, 40));
+        getContentPane().add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 190, 230, 40));
 
         btnAvailableall2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         btnAvailableall2.setText("Show Bookings");

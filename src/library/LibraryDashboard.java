@@ -30,6 +30,7 @@ public class LibraryDashboard extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         btnBooks = new javax.swing.JButton();
         btnStudyRooms = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -54,6 +55,9 @@ public class LibraryDashboard extends javax.swing.JFrame {
             }
         });
         jPanel1.add(btnStudyRooms, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 130, 227, 162));
+
+        jLabel1.setText("Library Dashboard");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -91,6 +95,7 @@ public class LibraryDashboard extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBooks;
     private javax.swing.JButton btnStudyRooms;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }
