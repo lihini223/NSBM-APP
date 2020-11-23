@@ -33,42 +33,72 @@ public class RegisterStudent extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
+        lblPassword = new javax.swing.JLabel();
         txtEmail = new javax.swing.JTextField();
         txtPassword = new javax.swing.JPasswordField();
-        jButton1 = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
+        txtId = new javax.swing.JTextField();
+        lblName = new javax.swing.JLabel();
+        txtName = new javax.swing.JTextField();
+        lblBatch = new javax.swing.JLabel();
+        lblFaculty = new javax.swing.JLabel();
+        cmbBatch = new javax.swing.JComboBox<>();
+        cmbFaculty = new javax.swing.JComboBox<>();
+        btnRegister = new javax.swing.JButton();
         lblBackground = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(1200, 600));
 
         jPanel1.setBackground(new java.awt.Color(58, 181, 74));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
         jLabel1.setText("Register Student");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 60, -1, -1));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 30, -1, -1));
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel2.setText("Email");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 170, -1, -1));
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 150, -1, -1));
 
-        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel3.setText("Password");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 240, -1, -1));
-        jPanel1.add(txtEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 170, 340, 30));
-        jPanel1.add(txtPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 240, 340, 30));
+        lblPassword.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        lblPassword.setText("Password");
+        jPanel1.add(lblPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 260, -1, -1));
+        jPanel1.add(txtEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 150, 340, 30));
+        jPanel1.add(txtPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 260, 340, 30));
 
-        jButton1.setBackground(new java.awt.Color(26, 86, 158));
-        jButton1.setText("Register");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel4.setText("ID");
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 100, -1, -1));
+        jPanel1.add(txtId, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 90, 340, 40));
+
+        lblName.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        lblName.setText("Name");
+        jPanel1.add(lblName, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 200, -1, -1));
+        jPanel1.add(txtName, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 200, 340, 30));
+
+        lblBatch.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        lblBatch.setText("Batch");
+        jPanel1.add(lblBatch, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 320, -1, -1));
+
+        lblFaculty.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        lblFaculty.setText("Faculty");
+        jPanel1.add(lblFaculty, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 390, -1, -1));
+
+        cmbBatch.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "18.1", "18.2", "19.1", "19.2", "20.1", "20.2" }));
+        jPanel1.add(cmbBatch, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 320, 340, 30));
+
+        cmbFaculty.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SOC", "SOB", "SOE" }));
+        jPanel1.add(cmbFaculty, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 380, 340, 30));
+
+        btnRegister.setText("Register");
+        btnRegister.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnRegisterActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 340, 350, 100));
+        jPanel1.add(btnRegister, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 500, 230, 60));
 
-        lblBackground.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/nsbmappbackground.jpg"))); // NOI18N
+        lblBackground.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/nsbmbackground.jpg"))); // NOI18N
         jPanel1.add(lblBackground, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1200, 600));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -86,31 +116,47 @@ public class RegisterStudent extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+<<<<<<< HEAD
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         Connection con = null;
+=======
+    private void btnRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegisterActionPerformed
+        Connection conn = null;
+>>>>>>> ba5388a95bee213a346bb13d2071fe67a1ab90e2
         PreparedStatement pstmt = null;
+        
         try{
             Class.forName("com.mysql.jdbc.Driver");
-            con = DriverManager.getConnection(info.DBInfo.DBUrl, info.DBInfo.DBUsername, info.DBInfo.DBPassword); // database information taken from DBInfo class
-            String query = "insert into testusers values(?, ?)";
-            pstmt = con.prepareStatement(query);
-            pstmt.setString(1, txtEmail.getText());
-            pstmt.setString(2, txtPassword.getText());
+            conn = DriverManager.getConnection(info.DBInfo.DBUrl, info.DBInfo.DBUsername, info.DBInfo.DBPassword); // database information taken from DBInfo class
+            String query = "insert into student values(?, ?, ?, ?, ?, ?)";
+            pstmt = conn.prepareStatement(query);
+            pstmt.setString(1, txtId.getText());
+            pstmt.setString(2, txtEmail.getText());
+            pstmt.setString(3, txtName.getText());
+            pstmt.setString(4, txtPassword.getText());
+            pstmt.setString(5, cmbBatch.getSelectedItem().toString());
+            pstmt.setString(6, cmbFaculty.getSelectedItem().toString());
             pstmt.executeUpdate();
+            
+            JOptionPane.showMessageDialog(null, "Successfully Registered");
+            
+            admin.AdminDashboard adminDashboardForm = new admin.AdminDashboard();
+            adminDashboardForm.setVisible(true);
+            this.dispose();
         }
         catch(Exception e){
-            JOptionPane.showMessageDialog(null, e);
+            JOptionPane.showMessageDialog(null, "Internal error, try again later.");
         }
         finally{
-            if(con != null){
+            if(conn != null){
                 try {
-                    con.close();
+                    conn.close();
                 } catch (SQLException ex) {
-                    // ignore exception
+                    System.out.println(ex);
                 }
             }
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnRegisterActionPerformed
 
     /**
      * @param args the command line arguments
@@ -118,13 +164,21 @@ public class RegisterStudent extends javax.swing.JFrame {
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btnRegister;
+    private javax.swing.JComboBox<String> cmbBatch;
+    private javax.swing.JComboBox<String> cmbFaculty;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lblBackground;
+    private javax.swing.JLabel lblBatch;
+    private javax.swing.JLabel lblFaculty;
+    private javax.swing.JLabel lblName;
+    private javax.swing.JLabel lblPassword;
     private javax.swing.JTextField txtEmail;
+    private javax.swing.JTextField txtId;
+    private javax.swing.JTextField txtName;
     private javax.swing.JPasswordField txtPassword;
     // End of variables declaration//GEN-END:variables
 }

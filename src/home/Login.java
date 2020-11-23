@@ -38,7 +38,6 @@ public class Login extends javax.swing.JFrame {
         txtEmail = new javax.swing.JTextField();
         txtPassword = new javax.swing.JPasswordField();
         btnLogin = new javax.swing.JButton();
-        lblSignup = new javax.swing.JLabel();
         lblLogin = new javax.swing.JLabel();
         lblBackground = new javax.swing.JLabel();
 
@@ -70,19 +69,11 @@ public class Login extends javax.swing.JFrame {
         });
         jPanel1.add(btnLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 290, 370, 67));
 
-        lblSignup.setText("Dont have an account ? Signup");
-        lblSignup.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lblSignupMouseClicked(evt);
-            }
-        });
-        jPanel1.add(lblSignup, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 410, -1, -1));
-
         lblLogin.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
         lblLogin.setText("Login");
         jPanel1.add(lblLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 50, -1, -1));
 
-        lblBackground.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/nsbmappbackground.jpg"))); // NOI18N
+        lblBackground.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/nsbmbackground.jpg"))); // NOI18N
         jPanel1.add(lblBackground, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1200, 600));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -102,30 +93,47 @@ public class Login extends javax.swing.JFrame {
 
     // login button click event
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
+        String userEmail = txtEmail.getText();
+        
+        if(userEmail.contains("@students.nsbm.lk")){
+            loginUser("student");
+        }
+        else if(userEmail.contains("@nsbm.lk")){
+            loginUser("staff");
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "Invalid credentials");
+        }       
+    }//GEN-LAST:event_btnLoginActionPerformed
+    
+    private void loginUser(String userType){
+        String userEmail = txtEmail.getText();
+        String userPassword = txtPassword.getText();
+        
         Connection con = null;
         PreparedStatement pstmt = null;
         ResultSet rs = null;
-        String userEmail = txtEmail.getText();
-        String userPassword = txtPassword.getText();
-   
-        // check if user is admin
-        if(userEmail.equals("admin") && userPassword.equals("admin")){
-            admin.AdminDashboard adminDashboardForm = new admin.AdminDashboard();
-            adminDashboardForm.setVisible(true);
-            this.dispose();
-        }
-        else{
-            try{
-                Class.forName("com.mysql.jdbc.Driver");
-                con = DriverManager.getConnection(info.DBInfo.DBUrl, info.DBInfo.DBUsername, info.DBInfo.DBPassword); // database information taken from DBInfo class
-                String query = "select * from testusers where email=? and password=?";
+        String query;
+        
+        try{
+            Class.forName("com.mysql.jdbc.Driver");
+            con = DriverManager.getConnection(info.DBInfo.DBUrl, info.DBInfo.DBUsername, info.DBInfo.DBPassword); // database information taken from DBInfo class
+
+            if(userType.equals("student")){
+                query = "select * from student where st_email=? and st_pwd=?";
                 pstmt = con.prepareStatement(query);
-                pstmt.setString(1, txtEmail.getText());
-                pstmt.setString(2, txtPassword.getText());
+                pstmt.setString(1, userEmail);
+                pstmt.setString(2, userPassword);
                 rs = pstmt.executeQuery();
-                // if login credentials are valid, redirect to home page
+                // if login credentials are valid redirect to home page
                 if(rs.next()){
+                    String name = rs.getString(3);
+                    String batch = rs.getString(5);
+                    String faculty = rs.getString(6);
                     info.SessionInfo.loggedInUserEmail = userEmail;
+                    info.SessionInfo.loggedInUser = name;
+                    info.SessionInfo.loggedInUserBatch = batch;
+                    info.SessionInfo.loggedInUserFaculty = faculty;
                     Dashboard dashboardForm = new Dashboard();
                     dashboardForm.setVisible(true);
                     this.dispose();
@@ -134,28 +142,38 @@ public class Login extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(null, "Invalid credentials"); //  if login credentials are invalid, show error
                 }
             }
-            catch(Exception e){
-                JOptionPane.showMessageDialog(null, e);
-            }
-            finally{
-                if(con != null){
-                    try {
-                        con.close();
-                    } catch (SQLException ex) {
-                        // ignore exception
-                    }
+            else if(userType.equals("staff")){
+                query = "select * from staff where emp_email=? and emp_pwd=?";
+                pstmt = con.prepareStatement(query);
+                pstmt.setString(1, userEmail);
+                pstmt.setString(2, userPassword);
+                rs = pstmt.executeQuery();
+                // if user credentials found in staff table redirect to admin dashboard
+                if(rs.next()){
+                    info.SessionInfo.loggedInUserEmail = userEmail;
+                    admin.AdminDashboard adminDashboardForm = new admin.AdminDashboard();
+                    adminDashboardForm.setVisible(true);
+                    this.dispose();
+                }
+                else{
+                    JOptionPane.showMessageDialog(null, "Invalid credentials"); //  if login credentials are invalid, show error
                 }
             }
         }
-        
-    }//GEN-LAST:event_btnLoginActionPerformed
-
-    private void lblSignupMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblSignupMouseClicked
-        //Signup signupForm = new Signup();
-        //signupForm.setVisible(true);
-        //this.dispose();
-    }//GEN-LAST:event_lblSignupMouseClicked
-
+        catch(Exception e){
+            JOptionPane.showMessageDialog(null, "Internal error, try again later.");
+        }
+        finally{
+            if(con != null){
+                try {
+                    con.close();
+                } catch (SQLException ex) {
+                    System.out.println(ex);
+                }
+            }
+        }
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -168,7 +186,6 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JLabel lblEmail;
     private javax.swing.JLabel lblLogin;
     private javax.swing.JLabel lblPassword;
-    private javax.swing.JLabel lblSignup;
     private javax.swing.JTextField txtEmail;
     private javax.swing.JPasswordField txtPassword;
     // End of variables declaration//GEN-END:variables
