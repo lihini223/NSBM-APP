@@ -1,7 +1,5 @@
 # NSBM-APP
 
-```Deadline : 1 st of December 2020```
-
 ## System Requirements 
 - Module Broadcasting System
 - Library Study Room Booking
