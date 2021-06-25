@@ -1,6 +1,6 @@
 # NSBM-APP
 
-## System Requirements 
+## Sub systems
   - Module Broadcasting System
   - Library Study Room Booking
   - Lecture Time table & Exam Time table 
